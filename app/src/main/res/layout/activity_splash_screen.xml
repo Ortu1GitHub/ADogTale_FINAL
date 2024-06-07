@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:id="@+id/main"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".ui.SplashScreenActivity">
+
+    <ImageView
+            android:id="@+id/iv2"
+            android:layout_width="117dp"
+            android:layout_height="105dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="@color/black"
+            android:padding="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnChatNow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.795"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.815"/>
+
+    <ImageView
+            android:id="@+id/iv1"
+            android:layout_width="117dp"
+            android:layout_height="105dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="@color/black"
+            android:padding="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnChatNow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.173"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.819"/>
+
+    <TextView
+            android:id="@+id/tvMatch"
+            android:layout_width="277dp"
+            android:layout_height="47dp"
+            android:text="IT'S A MATCH!!!"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.185"/>
+
+    <Button
+            android:id="@+id/btnChatLater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:text="Chat later"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/btnChatNow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.591"/>
+
+    <Button
+            android:id="@+id/btnChatNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:text="Chat now!"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.591"/>
+
+    <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/btnChatNow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv1"
+            app:layout_constraintVertical_bias="0.491"/>
+
+    <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/btnChatLater"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.586"
+            app:layout_constraintStart_toEndOf="@+id/tv1"
+            app:layout_constraintTop_toBottomOf="@+id/iv2"
+            app:layout_constraintVertical_bias="0.508"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

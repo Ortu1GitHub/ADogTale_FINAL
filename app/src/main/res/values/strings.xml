@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">ADogTale</string>
+    <string name="default_notification_channel_id">CANAL 1</string>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="breed">
+        <item></item>
+        <item>Akita</item>
+        <item>Boxer</item>
+        <item>Doberman</item>
+        <item>Fox Terrier</item>
+        <item>German Shepard</item>
+        <item>Maltese</item>
+        <item>Pointer</item>
+        <item>Spanish Sabueso</item>
+        <item>Yorkshire Terrier</item>
+        <item>Zerdava</item>
+    </string-array>
+    <string-array name="distance">
+        <item>2km</item>
+        <item>20km</item>
+        <item>100km</item>
+        <item>Unlimited</item>
+    </string-array>
+    <string-array name="prefBreed">
+        <item>Same as mine</item>
+        <item>Whatever</item>
+    </string-array>
+    <string-array name="lookingFor">
+        <item>Friendship</item>
+        <item>Long walks partnership</item>
+        <item>Sport partnership</item>
+        <item>Pair</item>
+    </string-array>
+    <string-array name="lowestAge">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+    </string-array>
+    <string-array name="highestAge">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+    </string-array>
+
+    <string name="topbar_item_1">Hamburger menu</string>
+    <string name="topbar_item_2">Chats</string>
+    <string name="topbar_item_3">Home</string>
+    <string name="topbar_item_4">Matches</string>
+    <string name="topbar_item_5">Profile</string>
+    <string name="no_more_cards_advertisment">No more profiles available</string>
+    <string name="no_more_cards_button">Reload</string>
+    <string name="edit_user">Edit User</string>
+    <string name="see_you">See you!</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="adt">ADT</string>
+    <string name="options">Options</string>
+    <string name="logout">Logout</string>
+    <string name="checkout">Checkout</string>
+    <string name="description">Description</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="town">Town</string>
+    <string name="phone">Phone</string>
+    <string name="save">Save</string>
+    <string name="confirm_delete">Confirm delete</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="keep_signed_in">Keep signed in</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="first_time_here">First time here?</string>
+    <string name="sing_up">Sing up</string>
+    <string name="rights">2024. A Dog Company</string>
+    <string name="payment">Payment</string>
+    <string name="premium">Become Premium</string>
+    <string name="become_premium">Premium</string>
+    <string name="sendmail">Send mail</string>
+    <string name="remember">Remember</string>
+
+
+
+
+
+
+
+</resources>

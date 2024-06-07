@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="0dp"
+    tools:context=".ui.EditProfileActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/tilLookingFor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvADT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:fontFamily="@font/londrina_shadow"
+            android:text="ADT"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvADT">
+
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Back"
+                android:src="@drawable/icon_back"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/tvSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/londrina_solid"
+                android:text="Edit profile"
+                android:textSize="25sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilLookingFor"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@id/tilPrefBreed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clTitle">
+
+        <AutoCompleteTextView
+            android:id="@+id/acLookingForEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            android:text="Looking for" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPrefBreed"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/tvPrefDistance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilLookingFor">
+
+        <AutoCompleteTextView
+            android:id="@+id/acPrefBreed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            android:text="Preferred breed" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvPrefDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Preferred distance"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/llDistance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilPrefBreed" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llDistance"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/llAgeRange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPrefDistance">
+
+        <com.google.android.material.slider.Slider
+            android:contentDescription="preferred distance"
+            android:id="@+id/sPrefDistance"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:stepSize="5"
+            android:valueFrom="5"
+            android:valueTo="200"
+            app:haloColor="@color/slider_halo_color"
+            app:thumbColor="@color/slider_thumb_color"
+            app:trackColorActive="@color/slider_active_color" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rectangle"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="5"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/tvPrefAgeRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Preferred age range"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/llAgeRange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llDistance" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llAgeRange"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/tvSomething"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPrefAgeRange">
+
+        <TextView
+            android:id="@+id/tvPreferredLowAge1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/rectangle"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <com.google.android.material.slider.RangeSlider
+            android:contentDescription="preferred age"
+            android:id="@+id/rSAge"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:valueFrom="1"
+            android:valueTo="15"
+            app:haloColor="@color/slider_halo_color"
+            app:thumbColor="@color/slider_thumb_color"
+            app:trackColorActive="@color/slider_active_color"
+            app:values="@array/ranger_slider_values" />
+
+        <TextView
+            android:id="@+id/tvPreferredHighAge1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rectangle"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="12"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/tvSomething"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Something about me"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/etSomething"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llAgeRange" />
+
+    <EditText
+        android:id="@+id/etSomething"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_rounded_corner"
+        android:elevation="4dp"
+        android:text="Bone lover"
+        app:layout_constraintBottom_toTopOf="@id/tvChoosePic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSomething" />
+
+    <TextView
+        android:id="@+id/tvChoosePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Choose your best pictures"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/llChoosePic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSomething" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llChoosePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/saveBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvChoosePic">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:contentDescription="picture 1"
+            android:id="@+id/ibPic1"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginHorizontal="5dp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/ibPic2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:contentDescription="picture 2"
+            android:layout_marginHorizontal="5dp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:contentDescription="picture 3"
+            android:id="@+id/ibPic3"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginHorizontal="5dp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/ibPic4"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:contentDescription="picture 4"
+            android:layout_marginHorizontal="5dp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/edit_text_rounded_corner"
+        android:backgroundTint="@color/backgroundGreen"
+        android:elevation="4dp"
+        android:text="Save"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llChoosePic" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
