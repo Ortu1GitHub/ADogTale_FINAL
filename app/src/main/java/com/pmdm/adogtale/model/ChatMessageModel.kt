@@ -8,6 +8,9 @@ class ChatMessageModel {
     var timestamp: Timestamp? = null
     var alreadyRead: Boolean? = false
 
+    // Do not delete
+    constructor()
+
     constructor(message: String?, senderId: String?, timestamp: Timestamp?, alreadyRead: Boolean) {
         this.message = message
         this.senderId = senderId
