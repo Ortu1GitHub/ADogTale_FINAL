@@ -87,6 +87,7 @@
     <string name="no_more_cards_advertisment">No more profiles available</string>
     <string name="no_more_cards_button">Reload</string>
     <string name="edit_user">Edit User</string>
+    <string name="edit_profile">Edit Profile</string>
     <string name="see_you">See you!</string>
     <string name="delete_account">Delete Account</string>
     <string name="adt">ADT</string>
@@ -118,11 +119,15 @@
     <string name="chatnow">Chat now</string>
     <string name="chatlater">Chat later</string>
     <string name="next">Next</string>
+    <string name="done">Done</string>
     <string name="match">IT IS A MATCH!!</string>
-    <string name="signup">Sign up</string>
+    <string name="signup">Sign Up</string>
     <string name="choose_gender">Choose gender</string>
     <string name="choose_breed">Choose breed</string>
+    <string name="prefDistance">Prefered distance</string>
+    <string name="prefAge">Prefered age range</string>
+    <string name="choosePics">Choose your best pictures</string>
+    <string name="something">Something about you</string>
     <string name="continue_registering">Continue registering your buddy</string>
-
 
 </resources>
