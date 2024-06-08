@@ -66,13 +66,17 @@
             android:id="@+id/description_image_carousel"
             android:layout_width="match_parent"
             android:layout_height="400dp"
+            android:elevation="4dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
             android:visibility="visible"
             app:autoPlay="false"
             app:showBottomShadow="false"
             app:showCaption="false"
             app:showIndicator="true"
             app:showNavigationButtons="false"
-            app:showTopShadow="false" />
+            app:showTopShadow="false"
+            app:shapeAppearanceOverlay="@style/RoundBorderImageView"/>
 
         <TextView
             android:id="@+id/description_title"

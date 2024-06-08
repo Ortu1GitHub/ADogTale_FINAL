@@ -5,7 +5,14 @@
         <item name="colorControlNormal">#FFFFFF</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.NoActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.NoActionBar" />
 
-
+    <style name="RoundImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="RoundBorderImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>

@@ -117,11 +117,12 @@
     <string name="remember">Remember</string>
     <string name="chatnow">Chat now</string>
     <string name="chatlater">Chat later</string>
-
-
-
-
-
+    <string name="next">Next</string>
+    <string name="match">IT IS A MATCH!!</string>
+    <string name="signup">Sign up</string>
+    <string name="choose_gender">Choose gender</string>
+    <string name="choose_breed">Choose breed</string>
+    <string name="continue_registering">Continue registering your buddy</string>
 
 
 </resources>

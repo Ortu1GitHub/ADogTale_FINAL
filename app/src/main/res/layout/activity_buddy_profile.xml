@@ -52,9 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:fontFamily="@font/londrina_solid"
-                android:text="SING UP"
+                android:text="SIGN UP"
                 android:textSize="25dp"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -73,51 +72,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clTitle">
 
-        <TextView
-            android:id="@+id/Name"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Name"
-            android:textColor="@color/black" />
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:hint="Name"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="4dp"
-            android:text="Spot" />
-
-        <TextView
-            android:id="@+id/tvAge"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Age"
-            android:textColor="@color/black" />
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
 
-        <EditText
-            android:id="@+id/etAge"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="4dp"
-            android:inputType="number"
-            android:text="4" />
-
-        <TextView
-            android:id="@+id/tvGender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:inputType="none"
-            android:text="Gender"
-            android:textColor="@color/black" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_marginVertical="10dp"
+                android:hint="Age"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilGender"
@@ -125,10 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clTitle">
+            android:layout_marginEnd="32dp">
 
             <AutoCompleteTextView
                 android:id="@+id/acGender"
@@ -136,18 +115,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="none"
-                android:text="Choose one" />
+                android:text="@string/choose_gender"
+                android:layout_marginVertical="10dp"/>
         </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/tvBreed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:inputType="none"
-            android:text="Breed"
-            android:textColor="@color/black" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBreed"
@@ -155,10 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clTitle">
+            android:layout_marginEnd="32dp">
 
             <AutoCompleteTextView
                 android:id="@+id/acBreed"
@@ -166,61 +133,49 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="none"
-                android:text="Choose one" />
+                android:text="@string/choose_breed"
+                android:layout_marginVertical="10dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvSomething"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:inputType="none"
-            android:text="Something about me"
-            android:textColor="@color/black" />
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
 
-        <EditText
-            android:id="@+id/etSomething"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="4dp"
-            android:text="Bone lover" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSomething"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:hint="Something about you"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvShortDescription"
-            android:layout_width="wrap_content"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:inputType="none"
-            android:text="Short description"
-            android:textColor="@color/black" />
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp">
 
-        <EditText
-            android:id="@+id/etShortDescription"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="4dp"
-            android:text="My name is Spot, I am a happy dog looking for someone" />
-
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etShortDescription"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginVertical="10dp"
+                android:hint="Describe yourself"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_rounded_corner"
             android:backgroundTint="@color/backgroundGreen"
-            android:elevation="4dp"
             android:text="Next"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

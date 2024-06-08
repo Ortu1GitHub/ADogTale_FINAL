@@ -9,6 +9,9 @@ class ChatroomModel {
     var lastMessageSenderId: String? = null
     var lastMessage: String? = null
 
+    // Do not delete
+    constructor()
+
     constructor(
         chatroomId: String?,
         userIds: List<String>?,

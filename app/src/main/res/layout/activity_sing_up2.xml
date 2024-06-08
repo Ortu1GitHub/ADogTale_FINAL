@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:elevation="4dp"
             android:fontFamily="@font/londrina_shadow"
-            android:text="ADT"
+            android:text="@string/adt"
             android:textSize="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:fontFamily="@font/londrina_solid"
-                android:text="SING UP"
+                android:text="@string/signup"
                 android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,90 +73,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clTitle">
 
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:inputType="textEmailAddress"
-            android:text="Name"
-            android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/etName"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="4dp"
-            app:layout_constraintBottom_toTopOf="@id/tvSurname"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvName" />
-
-        <TextView
-            android:id="@+id/tvSurname"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:inputType="textEmailAddress"
-            android:text="Surname"
-            android:textColor="@color/black" />
+            android:layout_marginVertical="8dp"
+            android:hint="@string/name">
 
-        <EditText
-            android:id="@+id/etSurname"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="4dp"
-            app:layout_constraintBottom_toTopOf="@id/tvTown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSurname" />
-
-        <TextView
-            android:id="@+id/tvTown"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:inputType="textEmailAddress"
-            android:text="Town"
-            android:textColor="@color/black" />
+            android:layout_marginVertical="8dp"
+            android:hint="@string/surname">
 
-        <EditText
-            android:id="@+id/etTown"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSurname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="4dp"
-            app:layout_constraintBottom_toTopOf="@id/tvPhone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTown" />
-
-        <TextView
-            android:id="@+id/tvPhone"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Phone"
-            android:textColor="@color/black" />
+            android:layout_marginVertical="8dp"
+            android:hint="@string/town">
 
-        <EditText
-            android:id="@+id/etPhone"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:background="@drawable/edit_text_rounded_corner"
-            android:elevation="4dp"
-            android:inputType="phone"
-            app:layout_constraintBottom_toTopOf="@id/btnNext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPhone" />
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:hint="@string/phone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext"
@@ -166,7 +135,7 @@
             android:background="@drawable/edit_text_rounded_corner"
             android:backgroundTint="@color/backgroundGreen"
             android:elevation="4dp"
-            android:text="Continue registering your buddy"
+            android:text="@string/continue_registering"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

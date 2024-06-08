@@ -132,8 +132,8 @@
             android:valueFrom="5"
             android:valueTo="200"
             app:haloColor="@color/slider_halo_color"
-            app:thumbColor="@color/slider_thumb_color"
-            app:trackColorActive="@color/slider_active_color" />
+            app:thumbColor="@color/backgroundGreen"
+            app:trackColorActive="@color/chat_color_sender" />
 
         <TextView
             android:id="@+id/tvDistance"
@@ -196,8 +196,8 @@
             android:valueFrom="1"
             android:valueTo="15"
             app:haloColor="@color/slider_halo_color"
-            app:thumbColor="@color/slider_thumb_color"
-            app:trackColorActive="@color/slider_active_color"
+            app:thumbColor="@color/backgroundGreen"
+            app:trackColorActive="@color/chat_color_sender"
             app:values="@array/ranger_slider_values" />
 
         <TextView

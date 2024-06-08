@@ -130,14 +130,12 @@ class CardSwipeActivity : AppCompatActivity() {
                 val new = task.result
                 Log.d("paginate", "Data fetched: $new")
                 if (new.isNullOrEmpty()) {
-                    Toast.makeText(this, "No more profiles available", Toast.LENGTH_LONG).show()
                 } else {
 
                     val callback = CardStackCallback(adapter.items, new)
                     val diffResult = DiffUtil.calculateDiff(callback)
                     adapter.items = new
                     Log.d("paginate", "Adapter items: ${adapter.items}")
-                    Toast.makeText(this, "Success: " + adapter.itemCount, Toast.LENGTH_LONG).show()
                     diffResult.dispatchUpdatesTo(adapter)
                 }
             } else {
