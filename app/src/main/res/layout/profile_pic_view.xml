@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                  android:id="@+id/iv1"
-                                                  android:layout_width="52dp"
-                                                  android:layout_height="52dp"
-                                                  android:src="@drawable/huella"
-                                                  app:civ_border_color="@color/black"
-                                                  app:civ_border_width="1dp"/>
+        android:id="@+id/iv1"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:src="@drawable/huella"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="1dp" />
 </RelativeLayout>

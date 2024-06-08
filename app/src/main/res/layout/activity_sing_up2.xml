@@ -4,26 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SignUpActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".ui.SignUpActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/llUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/llUser">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvADT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="4dp"
             android:fontFamily="@font/londrina_shadow"
             android:text="ADT"
             android:textSize="48dp"
-            android:elevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvADT">
+
             <ImageButton
                 android:id="@+id/back_btn"
                 android:layout_width="32dp"
@@ -44,11 +45,12 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/icon_back"
                 app:tint="@color/black" />
+
             <TextView
                 android:id="@+id/tvSignup"
-                android:layout_marginLeft="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:fontFamily="@font/londrina_solid"
                 android:text="SING UP"
                 android:textSize="25dp"
@@ -63,8 +65,8 @@
         android:id="@+id/llUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,15 +86,14 @@
 
         <EditText
             android:id="@+id/etName"
-            android:background="@drawable/edit_text_rounded_corner"
             android:layout_width="300dp"
             android:layout_height="40dp"
+            android:background="@drawable/edit_text_rounded_corner"
             android:elevation="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvName"
             app:layout_constraintBottom_toTopOf="@id/tvSurname"
-            android:text="TestName" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
 
         <TextView
             android:id="@+id/tvSurname"
@@ -106,15 +107,14 @@
 
         <EditText
             android:id="@+id/etSurname"
-            android:background="@drawable/edit_text_rounded_corner"
             android:layout_width="300dp"
             android:layout_height="40dp"
+            android:background="@drawable/edit_text_rounded_corner"
             android:elevation="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSurname"
             app:layout_constraintBottom_toTopOf="@id/tvTown"
-            android:text="TestSurname" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSurname" />
 
         <TextView
             android:id="@+id/tvTown"
@@ -128,15 +128,14 @@
 
         <EditText
             android:id="@+id/etTown"
-            android:background="@drawable/edit_text_rounded_corner"
             android:layout_width="300dp"
             android:layout_height="40dp"
+            android:background="@drawable/edit_text_rounded_corner"
             android:elevation="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTown"
             app:layout_constraintBottom_toTopOf="@id/tvPhone"
-            android:text="TestSurname" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTown" />
 
         <TextView
             android:id="@+id/tvPhone"
@@ -149,16 +148,15 @@
 
         <EditText
             android:id="@+id/etPhone"
-            android:background="@drawable/edit_text_rounded_corner"
             android:layout_width="300dp"
             android:layout_height="40dp"
+            android:background="@drawable/edit_text_rounded_corner"
             android:elevation="4dp"
             android:inputType="phone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPhone"
             app:layout_constraintBottom_toTopOf="@id/btnNext"
-            android:text="111222333" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPhone" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext"

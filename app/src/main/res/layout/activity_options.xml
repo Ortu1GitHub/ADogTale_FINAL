@@ -11,19 +11,19 @@
         android:id="@+id/clTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/clContent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/clContent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvADT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="4dp"
             android:fontFamily="@font/londrina_shadow"
             android:text="@string/adt"
             android:textSize="48dp"
-            android:elevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvADT">
+
             <ImageButton
                 android:id="@+id/back_btn"
                 android:layout_width="32dp"
@@ -44,11 +45,12 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/icon_back"
                 app:tint="@color/black" />
+
             <TextView
                 android:id="@+id/tvSignup"
-                android:layout_marginLeft="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:fontFamily="@font/londrina_solid"
                 android:text="@string/options"
                 android:textSize="25dp"
@@ -62,8 +64,8 @@
         android:id="@+id/clContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/clTitle"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clTitle">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/editProfileBtn"
@@ -74,10 +76,10 @@
             android:elevation="4dp"
             android:text="@string/edit_user"
             android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/checkoutButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/checkoutButton"
@@ -88,10 +90,10 @@
             android:elevation="4dp"
             android:text="@string/become_premium"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/editProfileBtn"
             app:layout_constraintBottom_toTopOf="@id/deleteAccountBtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editProfileBtn" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/deleteAccountBtn"
@@ -102,10 +104,10 @@
             android:elevation="4dp"
             android:text="@string/delete_account"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/checkoutButton"
             app:layout_constraintBottom_toTopOf="@id/logoutBtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkoutButton" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/logoutBtn"
@@ -116,10 +118,10 @@
             android:elevation="4dp"
             android:text="@string/logout"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/deleteAccountBtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/deleteAccountBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

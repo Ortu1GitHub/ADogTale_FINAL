@@ -4,26 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SignUpActivity"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".ui.SignUpActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/llUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/llUser">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvADT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="4dp"
             android:fontFamily="@font/londrina_shadow"
             android:text="ADT"
             android:textSize="48dp"
-            android:elevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvADT">
+
             <ImageButton
                 android:id="@+id/back_btn"
                 android:layout_width="32dp"
@@ -44,11 +45,12 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/icon_back"
                 app:tint="@color/black" />
+
             <TextView
                 android:id="@+id/tvSignup"
-                android:layout_marginLeft="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:fontFamily="@font/londrina_solid"
                 android:text="SING UP"
                 android:textSize="25dp"
@@ -58,13 +60,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/llUser"
         android:layout_width="356dp"
         android:layout_height="621dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="10dp"
-        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,11 +85,11 @@
 
         <EditText
             android:id="@+id/etName"
-            android:background="@drawable/edit_text_rounded_corner"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:text="Spot"
-            android:elevation="4dp" />
+            android:background="@drawable/edit_text_rounded_corner"
+            android:elevation="4dp"
+            android:text="Spot" />
 
         <TextView
             android:id="@+id/tvAge"
@@ -99,12 +102,12 @@
 
         <EditText
             android:id="@+id/etAge"
-            android:background="@drawable/edit_text_rounded_corner"
             android:layout_width="300dp"
             android:layout_height="40dp"
+            android:background="@drawable/edit_text_rounded_corner"
+            android:elevation="4dp"
             android:inputType="number"
-            android:text="4"
-            android:elevation="4dp" />
+            android:text="4" />
 
         <TextView
             android:id="@+id/tvGender"
@@ -178,11 +181,11 @@
 
         <EditText
             android:id="@+id/etSomething"
-            android:background="@drawable/edit_text_rounded_corner"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:text="Bone lover"
-            android:elevation="4dp" />
+            android:background="@drawable/edit_text_rounded_corner"
+            android:elevation="4dp"
+            android:text="Bone lover" />
 
         <TextView
             android:id="@+id/tvShortDescription"
@@ -196,26 +199,26 @@
 
         <EditText
             android:id="@+id/etShortDescription"
-            android:background="@drawable/edit_text_rounded_corner"
             android:layout_width="300dp"
             android:layout_height="100dp"
-            android:text="My name is Spot, I am a happy dog looking for someone"
-            android:elevation="4dp" />
+            android:background="@drawable/edit_text_rounded_corner"
+            android:elevation="4dp"
+            android:text="My name is Spot, I am a happy dog looking for someone" />
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext"
             android:layout_width="100dp"
-            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/edit_text_rounded_corner"
             android:backgroundTint="@color/backgroundGreen"
+            android:elevation="4dp"
             android:text="Next"
             android:textColor="@color/white"
-            android:elevation="4dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

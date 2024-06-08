@@ -70,5 +70,4 @@
         android:id="@+id/include"
         layout="@layout/toolbar2" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
