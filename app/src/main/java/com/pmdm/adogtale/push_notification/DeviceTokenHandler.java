@@ -5,14 +5,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-
 public class DeviceTokenHandler {
-
-
     public void storeDeviceToken(String userEmail, String deviceToken) {
         Map<String, Object> data = new HashMap<>();
         data.put("user_email", userEmail);

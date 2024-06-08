@@ -13,14 +13,7 @@ import java.util.concurrent.CompletableFuture
 class OtherProfileActions {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
-    private lateinit var otherProfile: Profile
-    private lateinit var profileFilter: ProfileFilter
-    private var filteredByBreed: Profile? = null
-    private var filteredByGender: Profile? = null
-    private var filteredByAge: Profile? = null
-    val profilesWithCards = mutableSetOf<Profile>()
     private val feedFilter: FeedFilter = FeedFilter()
-
 
     // Initialize database instances
     fun initFirebase() {
@@ -71,18 +64,18 @@ class OtherProfileActions {
         // Inicializar Firebase
         initFirebase()
 
-        // Acceder a la colección "profile" en la base de datos
+        // Retrieve profile collection
         db.collection("profile")
             .get()
-            // Agregar un listener para completar la tarea
+            // Adding task listener
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val profilesPassedFilter = mutableListOf<Profile>()
 
-                    // Usar una lista de Deferred para almacenar las corrutinas
+                    // Use Deferred list to save corrutines
                     val deferredList = mutableListOf<Deferred<Optional<Profile>>>()
 
-                    // Iterar sobre los documentos obtenidos
+                    // Iteration in obtained documents
                     for (document in task.result) {
 
                         Log.i("OtherProfileActions", "profile name: " + profile.name)
@@ -93,9 +86,8 @@ class OtherProfileActions {
                             continue
                         }
 
-                        // Actualizar otherProfile solo si la condición se cumple
+                        // Updates otherProfile in case filters are satisfied
                         val otherProfile = Profile(
-                            // Asignar valores de los campos del documento al objeto Profile, con valores predeterminados si el campo es nulo
                             name = document.getString("name") ?: "",
                             age = document.getString("age") ?: "",
                             gender = document.getString("gender") ?: "",
@@ -116,23 +108,26 @@ class OtherProfileActions {
                             preferedHighAge = document.getLong("prefHighestAge") ?: 0
                         )
 
-                        // Iniciar una corrutina para llamar a los métodos de ProfileFilter de forma asíncrona y almacenar el resultado en la lista deferredList
+                        // Corrutine to call ProfileFilter methods
                         val deferred = GlobalScope.async(Dispatchers.IO) {
                             var canPass = true
 
                             canPass = canPass && feedFilter.isSameLookingFor(profile, otherProfile)
 
-                            canPass = canPass && feedFilter.isInRangeOfDistance(profile, otherProfile)
+                            canPass =
+                                canPass && feedFilter.isInRangeOfDistance(profile, otherProfile)
 
                             if (profile.lookingFor.trim().lowercase().equals("pair")) {
-                                canPass = canPass && feedFilter.isDifferentGender(profile, otherProfile)
+                                canPass =
+                                    canPass && feedFilter.isDifferentGender(profile, otherProfile)
                             }
 
                             if (profile.prefBreed.trim().lowercase().equals("same as mine")) {
                                 canPass = canPass && feedFilter.isSameBreed(profile, otherProfile)
                             }
 
-                            canPass = canPass && feedFilter.isBetweenAgeInterval(profile, otherProfile)
+                            canPass =
+                                canPass && feedFilter.isBetweenAgeInterval(profile, otherProfile)
 
                             canPass = canPass && !feedFilter.isAlreadyLikedBy(profile, otherProfile)
 
@@ -140,10 +135,7 @@ class OtherProfileActions {
                         }
 
                         deferredList.add(deferred)
-
                     }
-
-                    // Esperar que todas las corrutinas se completen y agregar los perfiles que pasan los filtros a profilesPassedFilter
 
                     GlobalScope.launch(Dispatchers.Main) {
                         deferredList.awaitAll()
@@ -154,7 +146,7 @@ class OtherProfileActions {
                                 profilesPassedFilter.add(filteredProfileByAllFilters)
                             }
 
-                        // Llamar al callback con la lista de perfiles que pasan los filtros
+                        // Callback to profile list that satisfy filters
                         callback(profilesPassedFilter)
                     }
                 }

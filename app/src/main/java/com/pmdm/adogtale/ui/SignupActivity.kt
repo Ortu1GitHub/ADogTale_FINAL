@@ -23,7 +23,6 @@ class SignUpActivity : AppCompatActivity() {
         val btnNext: Button = findViewById(R.id.btnNext)
         backBtn = findViewById(R.id.back_btn)
 
-
         backBtn?.setOnClickListener { v: View? -> onBackPressed() }
 
         btnNext.setOnClickListener() {

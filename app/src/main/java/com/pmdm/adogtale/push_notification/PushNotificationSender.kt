@@ -12,7 +12,7 @@ private const val INTENT_ON_CLICK = "adt.OPEN_CHAT_ACTION"
 
 class PushNotificationSender {
 
-    val NOTIFICATION_TITLE: String = "El usuario %s te ha enviado un mensaje";
+    val NOTIFICATION_TITLE: String = "User %s sent you a message";
 
     val firebaseUtil = FirebaseUtil();
 
@@ -60,7 +60,7 @@ class PushNotificationSender {
 
     }
 
-    fun sendNotification(pushNotificationData: PushNotificationData){
+    fun sendNotification(pushNotificationData: PushNotificationData) {
         val jsonObject = JSONObject()
 
         val notificationObj = JSONObject()
@@ -69,7 +69,6 @@ class PushNotificationSender {
         notificationObj.put("click_action", INTENT_ON_CLICK)
 
         val replyToObj = JSONObject()
-        val fUser = firebaseUtil.getCurrentFirebaseUser()
         replyToObj.put("userId", pushNotificationData.originUser.userId)
         replyToObj.put("username", pushNotificationData.originUser.username)
         replyToObj.put("email", pushNotificationData.originUser.email)
@@ -91,13 +90,17 @@ class PushNotificationSender {
         Log.i("DeviceTokenHandler", "target user email: " + pushNotificationData.targetUser.email)
         Log.i("DeviceTokenHandler", "notificationRequest: " + jsonObject.toString())
 
-        deviceTokenHandler.retrieveDeviceToken(pushNotificationData.targetUser.email).thenAccept { deviceToken ->
+        deviceTokenHandler.retrieveDeviceToken(pushNotificationData.targetUser.email)
+            .thenAccept { deviceToken ->
 
-            Log.i("DeviceTokenHandler", "deviceToken inside PushNotificationSender: " + deviceToken)
-            jsonObject.put("to", deviceToken)
+                Log.i(
+                    "DeviceTokenHandler",
+                    "deviceToken inside PushNotificationSender: " + deviceToken
+                )
+                jsonObject.put("to", deviceToken)
 
-            callApi(jsonObject)
-        }
+                callApi(jsonObject)
+            }
     }
 
     private fun callApi(jsonObject: JSONObject) {

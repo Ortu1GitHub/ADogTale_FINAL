@@ -19,7 +19,7 @@ import com.pmdm.adogtale.AuthActivity
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.atomic.AtomicInteger
 
-public class FirebaseUtil {
+class FirebaseUtil {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
@@ -29,7 +29,7 @@ public class FirebaseUtil {
         db = FirebaseFirestore.getInstance()
     }
 
-    fun initDB(): FirebaseFirestore?  {
+    fun initDB(): FirebaseFirestore? {
         db = FirebaseFirestore.getInstance()
         return db
     }
@@ -105,12 +105,7 @@ public class FirebaseUtil {
             }
     }
 
-    fun allUserCollectionReference(userId: String? = null): DocumentReference {
-        val user = userId ?: fUser?.email.toString()
-        return FirebaseFirestore.getInstance().collection("users").document(user)
-    }
-
-    fun getCountUnCheckedMatches(userEmail: String): CompletableFuture<Int>{
+    fun getCountUnCheckedMatches(userEmail: String): CompletableFuture<Int> {
         val response = CompletableFuture<Int>()
 
         FirebaseFirestore.getInstance()
@@ -118,7 +113,7 @@ public class FirebaseUtil {
             .whereEqualTo("likeAlreadyChecked", false)
             .whereEqualTo("user_target", userEmail)
             .get()
-            .addOnCompleteListener{ task ->
+            .addOnCompleteListener { task ->
                 response.complete(task.result.size())
             }
 
@@ -133,50 +128,58 @@ public class FirebaseUtil {
             .collection("chatrooms")
             .whereArrayContains("userIds", userEmail)
             .get()
-            .addOnCompleteListener{ roomsTask ->
+            .addOnCompleteListener { roomsTask ->
 
-                Log.i("FirebaseUtil", "reading count of messages for userEmail: "+ userEmail)
-                Log.i("FirebaseUtil", "chatrooms count: "+ roomsTask.getResult().documents.size)
+                Log.i("FirebaseUtil", "reading count of messages for userEmail: " + userEmail)
+                Log.i("FirebaseUtil", "chatrooms count: " + roomsTask.getResult().documents.size)
 
 
                 val queryFutures = HashSet<CompletableFuture<Void>>()
 
                 roomsTask.getResult()
                     .documents
-                    .forEach{ room ->
+                    .forEach { room ->
 
                         val currentFuture = CompletableFuture<Void>()
 
-                        Log.i("FirebaseUtil", "running async query to read messages in room: "+ room.id)
+                        Log.i(
+                            "FirebaseUtil",
+                            "running async query to read messages in room: " + room.id
+                        )
 
-                            FirebaseFirestore.getInstance()
-                                .collection("chatrooms")
-                                .document(room.id)
-                                .collection("chats")
-                                .whereEqualTo("alreadyRead", false)
-                                .whereNotEqualTo("senderId", userEmail)
-                                .get()
-                                .addOnCompleteListener{ messagesResult ->
-                                    val totalOfUnreadMessages = messagesResult.result.size()
-                                    Log.i("FirebaseUtil", "count of unread messages: "+totalOfUnreadMessages)
-                                    Log.i("FirebaseUtil", "chatroomId: "+room.id)
-                                    secureCounter.addAndGet(totalOfUnreadMessages)
-                                    currentFuture.complete(null)
-                                }
+                        FirebaseFirestore.getInstance()
+                            .collection("chatrooms")
+                            .document(room.id)
+                            .collection("chats")
+                            .whereEqualTo("alreadyRead", false)
+                            .whereNotEqualTo("senderId", userEmail)
+                            .get()
+                            .addOnCompleteListener { messagesResult ->
+                                val totalOfUnreadMessages = messagesResult.result.size()
+                                Log.i(
+                                    "FirebaseUtil",
+                                    "count of unread messages: " + totalOfUnreadMessages
+                                )
+                                Log.i("FirebaseUtil", "chatroomId: " + room.id)
+                                secureCounter.addAndGet(totalOfUnreadMessages)
+                                currentFuture.complete(null)
+                            }
 
-                            Log.i("FirebaseUtil", "At least finishing async")
+                        Log.i("FirebaseUtil", "At least finishing async")
 
                         queryFutures.add(currentFuture)
                     }
 
-                Log.i("FirebaseUtil", "setting all queryFutures: "+queryFutures.size)
+                Log.i("FirebaseUtil", "setting all queryFutures: " + queryFutures.size)
 
                 CompletableFuture.allOf(*queryFutures.toTypedArray())
-                    .thenAccept{
-                        Log.i("FirebaseUtil", "returning total of all chatrooms messages unreaded: " +secureCounter.get())
+                    .thenAccept {
+                        Log.i(
+                            "FirebaseUtil",
+                            "returning total of all chatrooms messages unreaded: " + secureCounter.get()
+                        )
                         response.complete(secureCounter.get())
                     }
-
             }
 
         return response
@@ -230,7 +233,7 @@ public class FirebaseUtil {
 
     suspend fun getOtherProfileData(email: String): Profile? = suspendCoroutine { continuation ->
         try {
-            // Inicializar Firebase
+            // Inicialize Firebase
             var otherProfile: Profile? = null
             initFirebase()
             initDB()!!
@@ -270,14 +273,14 @@ public class FirebaseUtil {
                             continuation.resume(otherProfile)
                         } else {
                             Log.i("getOtherProfileData", "No se encontró ningún perfil")
-                            continuation.resume(null) // No se encontró ningún perfil
+                            continuation.resume(null)
                         }
                     } else {
                         Log.i(
                             "getOtherProfileData",
                             "Error al obtener datos: ${task.exception?.message}"
                         )
-                        continuation.resume(null) // Error al obtener datos
+                        continuation.resume(null)
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -290,14 +293,14 @@ public class FirebaseUtil {
         }
     }
 
-    fun putReadAllMessages(currentUserEmail: String, chatroomId: String){
+    fun putReadAllMessages(currentUserEmail: String, chatroomId: String) {
         getChatroomMessageReference(chatroomId)
             .whereEqualTo("alreadyRead", false)
             .whereNotEqualTo("senderId", currentUserEmail)
             .get()
-            .addOnCompleteListener{ task ->
+            .addOnCompleteListener { task ->
 
-                if(!task.isSuccessful){
+                if (!task.isSuccessful) {
                     return@addOnCompleteListener
                 }
 
@@ -306,12 +309,18 @@ public class FirebaseUtil {
 
                 task.getResult()
                     .documents
-                    .forEach{ document ->
+                    .forEach { document ->
                         getChatroomMessageReference(chatroomId)
                             .document(document.id)
                             .update(updatedData as Map<String, Any>)
-                            .addOnCompleteListener{
-                                Log.i("ChatActivity", String.format("updated messages to true in chatroom: %s", chatroomId))
+                            .addOnCompleteListener {
+                                Log.i(
+                                    "ChatActivity",
+                                    String.format(
+                                        "updated messages to true in chatroom: %s",
+                                        chatroomId
+                                    )
+                                )
                             }
 
                     }
@@ -319,14 +328,14 @@ public class FirebaseUtil {
             }
     }
 
-    fun putAllMatchesToChecked(currentUserEmail: String){
+    fun putAllMatchesToChecked(currentUserEmail: String) {
         FirebaseFirestore.getInstance()
             .collection("profiles_matching")
             .whereEqualTo("likeAlreadyChecked", false)
             .whereEqualTo("user_target", currentUserEmail)
             .get()
-            .addOnCompleteListener{ likesTask ->
-                likesTask.getResult().documents.forEach{ like ->
+            .addOnCompleteListener { likesTask ->
+                likesTask.getResult().documents.forEach { like ->
 
                     val updatedData = HashMap<String, Boolean>()
                     updatedData.put("likeAlreadyChecked", true);
@@ -335,8 +344,14 @@ public class FirebaseUtil {
                         .collection("profiles_matching")
                         .document(like.id)
                         .update(updatedData as Map<String, Any>)
-                        .addOnCompleteListener{
-                            Log.i("MatchesListActivity", String.format("updated profile matching to true with id: %s", like.id))
+                        .addOnCompleteListener {
+                            Log.i(
+                                "MatchesListActivity",
+                                String.format(
+                                    "updated profile matching to true with id: %s",
+                                    like.id
+                                )
+                            )
                         }
                 }
             }

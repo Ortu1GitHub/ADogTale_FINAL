@@ -34,12 +34,12 @@ class ListTestActivity : AppCompatActivity() {
                 folderReference.listAll().addOnSuccessListener { listResult ->
                     listResult.items.forEach { imageReference ->
 
-                        // Obtiene URL de descarga de cada imagen
+                        // Obtain images URL
                         imageReference.downloadUrl.addOnSuccessListener { uri ->
                             val downloadUrl = uri.toString()
                             Log.i("URL image", downloadUrl)
 
-                            // Añade los enlaces al TextView
+                            // Add links to textview
                             tvTest.append("$downloadUrl\n")
                         }
                     }
@@ -67,7 +67,7 @@ class ListTestActivity : AppCompatActivity() {
     }
 
     private fun getProfile(user: FirebaseUser) {
-        var userEmail: String = "rancio@elcampico.org"//user.email.toString()
+        var userEmail: String = "rancio@elcampico.org"
         Log.i("UserEmail getProfile", userEmail)
         db.collection("profile").document(userEmail).get()
             .addOnCompleteListener(this) { task ->
@@ -80,7 +80,6 @@ class ListTestActivity : AppCompatActivity() {
                     }
                 }
             }
-
     }
 
     private fun getPreferences(preferenceDocument: String) {
@@ -120,15 +119,12 @@ class ListTestActivity : AppCompatActivity() {
                     for (document in task.result!!) {
                         Log.i("Document in result", "dentro")
                         val profile = document.toObject(Profile::class.java)
-                        // Construye el nombre del documento de preferencias
                         val preferenceDocument = "${profile.userEmail}-${profile.name}"
                         Log.i("documento de acceso", preferenceDocument)
-                        // Obtiene el documento de preferencias
                         db.collection("preferences").document(preferenceDocument).get()
                             .addOnSuccessListener { prefDoc ->
                                 if (prefDoc.exists()) {
                                     val pref = prefDoc.toObject(Preferences::class.java)
-                                    // Comprueba si las preferencias coinciden
                                     if (pref?.lookingFor == preferences.lookingFor && pref?.prefBreed == preferences.prefBreed) {
                                         profileList.add(profile)
                                     }
@@ -142,31 +138,10 @@ class ListTestActivity : AppCompatActivity() {
             }
     }
 
-    /*
-    private fun getProfileList(preferences: Preferences) {
-        db.collection("profiles")
-            .whereEqualTo("lookingFor", preferences.lookingFor)
-            .whereEqualTo("breed", preferences.prefBreed)
-            .get()
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val profileList = ArrayList<Profile>()
-                    for (document in task.result!!) {
-                        val profile = document.toObject(Profile::class.java)
-                        profileList.add(profile)
-                    }
-                    getCards(profileList)
-                } else {
-                    Log.d("Firestore", "Error al obtener los perfiles", task.exception)
-                }
-            }
-    }
-*/
     private fun getCards(profileList: ArrayList<Profile>) {
         for (Profile in profileList) {
             Log.i("Profile ", Profile.name)
         }
-
     }
 }
 

@@ -31,7 +31,7 @@ class CheckoutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_checkout)
         backBtn = findViewById(R.id.back_btn)
 
-        prepareDataToCheckout().thenAccept{
+        prepareDataToCheckout().thenAccept {
             val checkoutButton = findViewById<Button>(R.id.checkout_button_pagar)
 
             checkoutButton.setOnClickListener {
@@ -49,15 +49,12 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     fun prepareDataToCheckout(): CompletableFuture<Void> {
-
         val client = OkHttpClient()
-        val url =
-            PAYMENT_HOSTNAME
+        val url = PAYMENT_HOSTNAME
         val request = Request.Builder().url(url).build()
-
         val responseFuture = CompletableFuture.runAsync {
 
-            try{
+            try {
 
                 val response = client.newCall(request).execute()
 
@@ -80,40 +77,38 @@ class CheckoutActivity : AppCompatActivity() {
                 PaymentConfiguration.init(this, publishableKey)
 
                 Log.i("CheckoutActivity", response.toString())
+            } catch (e: Exception) {
+                Log.i("CheckoutActivity", "error: " + e.message)
             }
-            catch (e: Exception){
-                Log.i("CheckoutActivity", "error: "+e.message)
-            }
-
         }
-
         return responseFuture;
-
     }
 
     fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
         when (paymentSheetResult) {
             is PaymentSheetResult.Canceled -> {
-                Toast.makeText(baseContext,"Payment Canceled! Please, Try again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    baseContext,
+                    "Payment Canceled! Please, Try again",
+                    Toast.LENGTH_SHORT
+                ).show()
                 Log.i("CheckoutActivity", "Canceled")
             }
 
             is PaymentSheetResult.Failed -> {
-                Toast.makeText(baseContext,"Payment Failed! Please, Try again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, "Payment Failed! Please, Try again", Toast.LENGTH_SHORT)
+                    .show()
                 Log.i("CheckoutActivity", "Error: ${paymentSheetResult.error}")
             }
 
             is PaymentSheetResult.Completed -> {
-
                 Log.i("CheckoutActivity", "Completed")
                 prepareDataToCheckout()
-                Toast.makeText(baseContext,"Payment done!", Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext, "Payment done!", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, CardSwipeActivity::class.java)
                 startActivity(intent)
             }
         }
-
-
     }
 
     fun presentPaymentSheet() {

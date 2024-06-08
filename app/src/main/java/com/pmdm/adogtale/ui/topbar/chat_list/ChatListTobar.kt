@@ -2,7 +2,6 @@ package com.pmdm.adogtale.ui.topbar.chat_list
 
 import android.content.Intent
 import android.util.Log
-import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +11,6 @@ import com.pmdm.adogtale.controller.ProfileActions
 import com.pmdm.adogtale.matches.MatchesListActivity
 import com.pmdm.adogtale.ui.CardSwipeActivity
 import com.pmdm.adogtale.ui.EditProfileActivity
-import com.pmdm.adogtale.ui.topbar.card_swipe.CardSwipeTopbar.CardSwipeTobarOption
 import com.pmdm.adogtale.ui.topbar.hamburger_menu.ExtraMenu
 import com.squareup.picasso.Picasso
 
@@ -22,17 +20,11 @@ class ChatListTobar(private val context: AppCompatActivity) {
     private lateinit var extraMenu: ExtraMenu
 
     fun configureTopbar() {
-        // Encuentra la referencia de tu Toolbar
+        // Toolbar reference
         val toolbar = context.findViewById<Toolbar>(R.id.topbar_chat)
-
-        // Configura la Toolbar como la barra de acción de la actividad
         context.setSupportActionBar(toolbar)
-
         setTopbarListeners()
-
-        // Opcional: si deseas ocultar el título predeterminado de la barra de acción
         context.supportActionBar?.setDisplayShowTitleEnabled(false)
-
         downloadProfileImageToTopbar()
     }
 
@@ -95,26 +87,6 @@ class ChatListTobar(private val context: AppCompatActivity) {
             }
             ChatListTopbarOption.PROFILE -> {
                 context.findViewById<ImageView>(R.id.chat_list_topbar_profile_badge).visibility = VISIBLE
-            }
-        }
-    }
-
-    fun hideBadge(menuOption: ChatListTopbarOption) {
-        when(menuOption) {
-            ChatListTopbarOption.SETTINGS -> {
-                context.findViewById<ImageView>(R.id.chat_list_topbar_settings_badge).visibility = INVISIBLE
-            }
-            ChatListTopbarOption.CARD_SWIPE -> {
-                context.findViewById<ImageView>(R.id.chat_list_topbar_card_swipe_badge).visibility = INVISIBLE
-            }
-            ChatListTopbarOption.LOGO -> {
-                context.findViewById<ImageView>(R.id.chat_list_topbar_logo_badge).visibility = INVISIBLE
-            }
-            ChatListTopbarOption.MATCHES -> {
-                context.findViewById<ImageView>(R.id.chat_list_topbar_matches_badge).visibility = INVISIBLE
-            }
-            ChatListTopbarOption.PROFILE -> {
-                context.findViewById<ImageView>(R.id.chat_list_topbar_profile_badge).visibility = INVISIBLE
             }
         }
     }

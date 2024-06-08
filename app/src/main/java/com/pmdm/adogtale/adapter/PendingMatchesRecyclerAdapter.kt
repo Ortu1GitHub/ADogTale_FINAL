@@ -44,7 +44,10 @@ class PendingMatchesRecyclerAdapter(
 
         holder.usernameText.text = profile.profile_original
 
-        Log.i("PendingmatchesRecyclerAdapter", "holder.usernameText.text: " + holder.usernameText.text)
+        Log.i(
+            "PendingmatchesRecyclerAdapter",
+            "holder.usernameText.text: " + holder.usernameText.text
+        )
 
         GlobalScope.launch {
             val profileData = firebaseUtil.getOtherProfileData(profile.user_original.toString())
@@ -103,8 +106,6 @@ class PendingMatchesRecyclerAdapter(
 
     inner class PendingMatchesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val usernameText: TextView = itemView.findViewById(R.id.user_name_text)
-        val lastMessageText: TextView = itemView.findViewById(R.id.last_message_text)
-        val lastMessageTime: TextView = itemView.findViewById(R.id.last_message_time_text)
         val pic: ImageView = itemView.findViewById(R.id.iv1)
     }
 
@@ -156,9 +157,6 @@ class PendingMatchesRecyclerAdapter(
             .addOnFailureListener { e ->
                 Log.e("ORTU9", "Error getting documents: ", e)
             }
-
     }
-
-
 }
 

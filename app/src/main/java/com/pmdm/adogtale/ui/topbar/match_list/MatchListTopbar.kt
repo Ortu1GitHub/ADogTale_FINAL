@@ -2,7 +2,6 @@ package com.pmdm.adogtale.ui.topbar.match_list
 
 import android.content.Intent
 import android.util.Log
-import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -21,17 +20,11 @@ class MatchListTopbar(private val context: AppCompatActivity) {
     private lateinit var extraMenu: ExtraMenu
 
     fun configureTopbar() {
-        // Encuentra la referencia de tu Toolbar
+        // Toolbar reference
         val toolbar = context.findViewById<Toolbar>(R.id.topbar_matches)
-
-        // Configura la Toolbar como la barra de acción de la actividad
         context.setSupportActionBar(toolbar)
-
         setTopbarListeners()
-
-        // Opcional: si deseas ocultar el título predeterminado de la barra de acción
         context.supportActionBar?.setDisplayShowTitleEnabled(false)
-
         downloadProfileImageToTopbar()
     }
 
@@ -62,7 +55,8 @@ class MatchListTopbar(private val context: AppCompatActivity) {
     }
 
     private fun downloadProfileImageToTopbar() {
-        val profileTopbarMenuOption = context.findViewById<ImageView>(R.id.matches_list_topbar_profile)
+        val profileTopbarMenuOption =
+            context.findViewById<ImageView>(R.id.matches_list_topbar_profile)
 
         profileActions.getCurrentProfile { profile ->
             Log.i("MatchListActivity", "toolbar pic1: " + profile.pic1)
@@ -78,41 +72,30 @@ class MatchListTopbar(private val context: AppCompatActivity) {
     }
 
     fun showBadge(menuOption: MatchListTopbarOption) {
-        when(menuOption) {
+        when (menuOption) {
             MatchListTopbarOption.SETTINGS -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_settings_badge).visibility = VISIBLE
+                context.findViewById<ImageView>(R.id.matches_list_topbar_settings_badge).visibility =
+                    VISIBLE
             }
-            MatchListTopbarOption.CHAT -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_chats_badge).visibility = VISIBLE
-            }
-            MatchListTopbarOption.LOGO -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_logo_badge).visibility = VISIBLE
-            }
-            MatchListTopbarOption.CARD_SWIPE -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_card_swipe_badge).visibility = VISIBLE
-            }
-            MatchListTopbarOption.PROFILE -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_profile_badge).visibility = VISIBLE
-            }
-        }
-    }
 
-    fun hideBadge(menuOption: MatchListTopbarOption) {
-        when(menuOption) {
-            MatchListTopbarOption.SETTINGS -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_settings_badge).visibility = INVISIBLE
-            }
             MatchListTopbarOption.CHAT -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_chats_badge).visibility = INVISIBLE
+                context.findViewById<ImageView>(R.id.matches_list_topbar_chats_badge).visibility =
+                    VISIBLE
             }
+
             MatchListTopbarOption.LOGO -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_logo_badge).visibility = INVISIBLE
+                context.findViewById<ImageView>(R.id.matches_list_topbar_logo_badge).visibility =
+                    VISIBLE
             }
+
             MatchListTopbarOption.CARD_SWIPE -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_card_swipe_badge).visibility = INVISIBLE
+                context.findViewById<ImageView>(R.id.matches_list_topbar_card_swipe_badge).visibility =
+                    VISIBLE
             }
+
             MatchListTopbarOption.PROFILE -> {
-                context.findViewById<ImageView>(R.id.matches_list_topbar_profile_badge).visibility = INVISIBLE
+                context.findViewById<ImageView>(R.id.matches_list_topbar_profile_badge).visibility =
+                    VISIBLE
             }
         }
     }

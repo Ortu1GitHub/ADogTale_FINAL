@@ -30,8 +30,6 @@ class OptionsActivity : AppCompatActivity() {
         backBtn = findViewById(R.id.back_btn)
         checkoutButton = findViewById(R.id.checkoutButton)
 
-
-
         editProfileBtn.setOnClickListener {
             val intent = Intent(this, EditUserActivity::class.java)
             startActivity(intent)

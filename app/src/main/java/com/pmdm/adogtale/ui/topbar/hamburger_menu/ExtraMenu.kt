@@ -16,10 +16,6 @@ class ExtraMenu(private val context: AppCompatActivity, private val trigger: Ima
         nativeMenu = PopupMenu(context, trigger)
 
         nativeMenu.menuInflater.inflate(R.menu.topbar_extra_menu, nativeMenu.menu)
-
-       /* nativeMenu.setOnMenuItemClickListener { _ ->
-            return@setOnMenuItemClickListener true
-        }*/
         nativeMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.topbar_extra_menu_edit_profile -> {
@@ -27,10 +23,12 @@ class ExtraMenu(private val context: AppCompatActivity, private val trigger: Ima
                     context.startActivity(intent)
                     true
                 }
+
                 R.id.topbar_extra_menu_logout -> {
                     firebaseUtil.logout(context)
                     true
                 }
+
                 else -> false
             }
         }

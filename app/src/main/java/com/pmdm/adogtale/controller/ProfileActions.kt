@@ -106,7 +106,7 @@ class ProfileActions {
             .get()
             .addOnCompleteListener() { task ->
                 if (!task.isSuccessful) {
-                    Log.i("ProfileActions", "getProfileFromEmail error, couldn't get profile information for email: "+email)
+                    Log.i("ProfileActions", "getProfileFromEmail error " + email)
                     return@addOnCompleteListener
                 }
 
@@ -137,7 +137,7 @@ class ProfileActions {
 
     }
 
-    fun updateProfileTown(town: String, callback: () -> Unit){
+    fun updateProfileTown(town: String, callback: () -> Unit) {
 
         val currentFirebaseUser = getCurrentFirebaseUser()
         val email = currentFirebaseUser?.email!!
@@ -150,10 +150,8 @@ class ProfileActions {
             .collection("profile")
             .document(email)
             .update(dataToUpdate as Map<String, Any>)
-            .addOnCompleteListener{
+            .addOnCompleteListener {
                 callback()
             }
-
     }
-
 }

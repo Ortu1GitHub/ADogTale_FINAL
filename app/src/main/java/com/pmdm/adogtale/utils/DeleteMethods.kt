@@ -6,12 +6,10 @@ import android.widget.Toast
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class DeleteMethods {
 
     val firebaseUtil = FirebaseUtil()
     private lateinit var db: FirebaseFirestore
-
     fun deleteEverythingOfAnUser(email: String, password: String, context: Context) {
         try {
             Log.i("deleteEverythingOfAUser", email)
@@ -23,14 +21,14 @@ class DeleteMethods {
             deleteUserToken(email)
             deleteChatRoomWhereUserIsIn(email)
 
-            Toast.makeText(context, "Cuenta eliminada", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Deleted account", Toast.LENGTH_SHORT).show()
 
         } catch (e: Exception) {
             Log.e(
                 "DeleteEverything Error",
                 "Error deleting everything for user $email: ${e.message}"
             )
-            Toast.makeText(context, "Error eliminando cuenta", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "There was a problem when deleting account", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -55,14 +53,10 @@ class DeleteMethods {
     }
 
     fun deleteUser(email: String) {
-        // Inicializar Firebase si es necesario
         db = firebaseUtil.initDB()!!
 
-
-        // Referencia a la colección y al documento
         val userRef = db.collection("user").document(email)
 
-        // Borrar el documento
         userRef.delete()
             .addOnSuccessListener {
                 Log.i("User eliminado", "user eliminado correctamente")
@@ -73,16 +67,13 @@ class DeleteMethods {
     }
 
     fun deleteUserToken(email: String) {
-        // Inicializar Firebase si es necesario
         db = firebaseUtil.initDB()!!
 
-        // Referencia a la colección y al documento
         val userRef = db.collection("device_tokens").document(email)
 
-        // Borrar el documento
         userRef.delete()
             .addOnSuccessListener {
-                Log.i("Device token eliminado", "device token eliminado correctamente")
+                Log.i("Device token removed", "device token eliminado correctamente")
             }
             .addOnFailureListener { error ->
                 Log.i("Error eliminando device token ", "User: " + email)
@@ -135,13 +126,10 @@ class DeleteMethods {
     }
 
     fun deleteProfileFromUser(email: String) {
-        // Inicializar Firebase si es necesario
         db = firebaseUtil.initDB()!!
 
-        // Referencia a la colección y al documento
         val profileRef = db.collection("profile").document(email)
 
-        // Borrar el documento
         profileRef.delete()
             .addOnSuccessListener {
                 Log.i("User eliminado", "profile eliminado correctamente")
@@ -163,7 +151,6 @@ class DeleteMethods {
                         Log.i("Chatroom document", document.reference.toString())
                         Log.i("Chatroom document id", document.reference.id)
 
-                        // Eliminar la colección "chats" dentro del documento actual
                         val chatsCollection = document.reference.collection("chats")
                         chatsCollection.get()
                             .addOnSuccessListener { chatsSnapshot ->
@@ -172,19 +159,16 @@ class DeleteMethods {
                                         chatDocument.reference.delete()
                                     }
                                 }
-                                // Después de eliminar todos los documentos de la subcolección,
-                                // eliminar el documento de la colección "chatrooms"
+
                                 document.reference.delete()
                             }
                             .addOnFailureListener { e ->
-                                // Manejar errores al obtener la colección "chats"
                                 println("Error fetching chats: $e")
                             }
                     }
                 }
             }
             .addOnFailureListener { e ->
-                // Manejo de errores al obtener la colección "chatrooms"
                 println("Error fetching chat rooms: $e")
             }
     }

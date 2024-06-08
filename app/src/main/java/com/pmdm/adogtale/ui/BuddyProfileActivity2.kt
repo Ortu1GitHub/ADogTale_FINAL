@@ -75,11 +75,10 @@ class BuddyProfileActivity2 : AppCompatActivity() {
 
         getFCMToken { token ->
             if (token != null) {
-                // Haz algo con el token aquí
                 Log.i("FCM token: ", token)
                 user.token = token
             } else {
-                Log.i("No se pudo obtener el token FCM", "NULO")
+                Log.i("Could not obtain FCM token", "NULL")
             }
         }
 
@@ -100,21 +99,9 @@ class BuddyProfileActivity2 : AppCompatActivity() {
         // Prefered Distace
         preferredDistanceTextView = findViewById(R.id.tvDistance)
         preferredDistanceSlider = findViewById(R.id.sPrefDistance)
-        preferredDistanceSlider.addOnChangeListener{slider, value, fromUser ->
+        preferredDistanceSlider.addOnChangeListener { slider, value, fromUser ->
             preferredDistanceTextView.setText(value.toString() + "km")
         }
-
-        // Prefered Lowest Age
-        val preferedLowAge = resources.getStringArray(R.array.lowestAge)
-        val arrayPrefLowAge = ArrayAdapter(this, R.layout.dropdown_menu, preferedLowAge)
-        //acPreferedLowestAge = findViewById(R.id.acPreferedLowAge)
-        //acPreferedLowestAge.setAdapter(arrayPrefLowAge)
-
-        // Prefered Highest Age
-        val preferedHighAge = resources.getStringArray(R.array.highestAge)
-        val arrayPrefHighAge = ArrayAdapter(this, R.layout.dropdown_menu, preferedHighAge)
-        //acPreferedHighestAge = findViewById(R.id.acPreferedHighAge)
-        //acPreferedHighestAge.setAdapter(arrayPrefHighAge)
 
         backBtn?.setOnClickListener { v: View? -> onBackPressed() }
 
@@ -315,7 +302,6 @@ class BuddyProfileActivity2 : AppCompatActivity() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val token = task.result
-                // Aquí puedes hacer cualquier cosa que necesites con el token, como almacenarlo en la base de datos
                 callback(token)
             } else {
                 callback(null)

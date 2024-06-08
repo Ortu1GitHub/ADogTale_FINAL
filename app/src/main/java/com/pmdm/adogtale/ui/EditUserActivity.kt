@@ -49,7 +49,7 @@ class EditUserActivity : AppCompatActivity() {
         saveBtn = findViewById(R.id.saveBtn)
         backBtn = findViewById(R.id.back_btn)
         password = findViewById(R.id.etPassword)
-        confirmPassword =  findViewById(R.id.etConfirmPassword)
+        confirmPassword = findViewById(R.id.etConfirmPassword)
         name = findViewById(R.id.etName)
         username = findViewById(R.id.etUsername)
         surname = findViewById(R.id.etSurname)
@@ -57,19 +57,25 @@ class EditUserActivity : AppCompatActivity() {
         town = findViewById(R.id.etTown)
 
         saveBtn?.setOnClickListener {
-            user = setUser(name,username,surname,phone,town)
-            checkPassword(password,confirmPassword)
-            if(checkPass){
-                userMethods.updateUserAccount(user!!,password!!.text.toString(),this)
-
-                profileActions.updateProfileTown(user!!.town){}
+            user = setUser(name, username, surname, phone, town)
+            checkPassword(password, confirmPassword)
+            if (checkPass) {
+                userMethods.updateUserAccount(user!!, password!!.text.toString(), this)
+                profileActions.updateProfileTown(user!!.town) {}
             }
             val intent = Intent(this, OptionsActivity::class.java)
             startActivity(intent)
         }
         backBtn?.setOnClickListener { v: View? -> onBackPressed() }
     }
-    fun setUser (name:EditText?, username:EditText?, surname:EditText?, phone:EditText?, town:EditText?):User {
+
+    fun setUser(
+        name: EditText?,
+        username: EditText?,
+        surname: EditText?,
+        phone: EditText?,
+        town: EditText?
+    ): User {
         val user = User(
             username = username?.text.toString(),
             town = town?.text.toString(),
@@ -79,7 +85,8 @@ class EditUserActivity : AppCompatActivity() {
         )
         return user
     }
-    fun checkPassword (password:EditText?, confirmPassword:EditText?):Boolean {
+
+    fun checkPassword(password: EditText?, confirmPassword: EditText?): Boolean {
         var password = password?.text.toString().trim()
         var confirmPassword = confirmPassword?.text.toString().trim()
 
@@ -90,7 +97,8 @@ class EditUserActivity : AppCompatActivity() {
         }
         return checkPass
     }
-    fun setUserDataOnView(user:User) {
+
+    fun setUserDataOnView(user: User) {
         name?.setText(user.name)
         username?.setText(user.username)
         surname?.setText(user.surname)

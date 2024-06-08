@@ -30,7 +30,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.util.*
-import kotlin.collections.HashMap
 
 class ChatActivity : AppCompatActivity() {
     val firebaseUtil = FirebaseUtil()
@@ -88,7 +87,7 @@ class ChatActivity : AppCompatActivity() {
         otherUsername = findViewById(R.id.other_username)
         recyclerView = findViewById(R.id.chat_recycler_view)
 
-        imageView!!.setOnClickListener{
+        imageView!!.setOnClickListener {
             val intentForDescription = Intent(this, DescriptionActivity::class.java)
             intentForDescription.putExtra("targetEmail", targetEmail)
             startActivity(intentForDescription)
@@ -109,13 +108,11 @@ class ChatActivity : AppCompatActivity() {
 
             firebaseUtil.putReadAllMessages(user.email, chatroomId!!)
 
-            messageInput!!.setOnClickListener{ _ ->
+            messageInput!!.setOnClickListener { _ ->
                 firebaseUtil.putReadAllMessages(user.email, chatroomId!!)
             }
         }
-
         Log.i("onCreate msg", "final")
-
     }
 
     fun setupChatRecyclerView() {
@@ -150,7 +147,6 @@ class ChatActivity : AppCompatActivity() {
         Log.i("msg chatroom", chatroomModel?.chatroomId.toString())
         val userIdsList = chatroomModel?.userIds?.toMutableList() ?: mutableListOf()
         Log.i("msg userIdsList", userIdsList.toString())
-        //userIdsList.add(fUser?.email.toString())
         chatroomModel?.userIds = userIdsList
         Log.i("msg chatroom IDs", chatroomModel?.userIds.toString())
         chatroomModel?.lastMessage = message

@@ -6,7 +6,6 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.pmdm.adogtale.model.Profile
-import com.pmdm.adogtale.model.User
 import java.util.concurrent.Executors
 
 class ProfileMethods {
@@ -15,11 +14,11 @@ class ProfileMethods {
     private lateinit var fUser: FirebaseUser
     private val executor = Executors.newSingleThreadExecutor()
 
-    fun updateProfile(profile: Profile, context: Context, fast:Boolean) {
+    fun updateProfile(profile: Profile, context: Context, fast: Boolean) {
         db = firebaseUtil.initDB()!!
         fUser = firebaseUtil.getCurrentFirebaseUser()!!
 
-        if(fast) {
+        if (fast) {
             fastUpdateProfileData(profile)
         } else {
             updateProfileAccount(profile)
@@ -27,6 +26,7 @@ class ProfileMethods {
 
         Toast.makeText(context, "Profile updated", Toast.LENGTH_SHORT).show()
     }
+
     fun fastUpdateProfileData(profile: Profile) {
         var email = fUser?.email.toString()
         Log.i("updateUserAccount email", email)
@@ -101,7 +101,7 @@ class ProfileMethods {
                         name = document.getString("name") ?: "",
                         age = document.getString("age") ?: "",
                         gender = document.getString("gender") ?: "",
-                        breed = document.getString("breed") ?: "" ,
+                        breed = document.getString("breed") ?: "",
                         something = document.getString("something") ?: "",
                         shortDescription = document.getString("shortDescription") ?: "",
                         lookingFor = document.getString("lookingFor") ?: "",

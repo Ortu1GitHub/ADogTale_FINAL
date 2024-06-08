@@ -23,7 +23,6 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.pmdm.adogtale.R
@@ -242,7 +241,6 @@ class EditProfileActivity : AppCompatActivity() {
                 val downloadUrl = uri
                 Toast.makeText(this, "Upload done!", Toast.LENGTH_SHORT).show()
                 profilePics[selectedButton!!.id.toString()] = downloadUrl.toString()
-                // Determinar qué atributo actualizar según el botón seleccionado
                 when (selectedButton?.id) {
                     R.id.ibPic1 -> profile?.pic1 = downloadUrl.toString()
                     R.id.ibPic2 -> profile?.pic2 = downloadUrl.toString()
@@ -273,7 +271,6 @@ class EditProfileActivity : AppCompatActivity() {
         var im4 = profile.pic4
 
         //Original and target images are loaded
-
         if (!im1.isNullOrEmpty()) {
             Picasso.get()
                 .load(im1)

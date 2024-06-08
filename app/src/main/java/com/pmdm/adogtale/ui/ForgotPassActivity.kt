@@ -30,7 +30,6 @@ class ForgotPassActivity : AppCompatActivity() {
         }
 
         backBtn?.setOnClickListener { v: View? -> onBackPressed() }
-
         firebaseAuth = Firebase.auth
     }
 

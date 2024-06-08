@@ -21,12 +21,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import com.pmdm.adogtale.R
-import com.pmdm.adogtale.chat.ChatListActivity
 import com.pmdm.adogtale.controller.CardStackAdapter
 import com.pmdm.adogtale.controller.CardStackCallback
 import com.pmdm.adogtale.controller.OtherProfileActions
 import com.pmdm.adogtale.controller.ProfileActions
-import com.pmdm.adogtale.matches.MatchesListActivity
 import com.pmdm.adogtale.model.Itemx
 import com.pmdm.adogtale.model.Profile
 import com.pmdm.adogtale.model.ProfilesMatching
@@ -37,8 +35,6 @@ import com.pmdm.adogtale.utils.FirebaseUtil
 import com.yuyakaido.android.cardstackview.*
 import java.util.*
 import java.util.concurrent.CompletableFuture
-import android.view.Window
-import android.view.WindowManager
 import com.pmdm.adogtale.push_notification.PushNotificationData
 import com.pmdm.adogtale.push_notification.PushNotificationSender
 import com.pmdm.adogtale.ui.statusbar.StatusbarColorHandler
@@ -49,48 +45,36 @@ class CardSwipeActivity : AppCompatActivity() {
 
     private lateinit var adapter: CardStackAdapter
     private lateinit var profileMatching: ProfilesMatching
-    private val TAG2 = "ORTU"
     private lateinit var profileActions: ProfileActions
     private lateinit var otherProfileActions: OtherProfileActions
 
 
     private lateinit var firebaseAuth: FirebaseAuth
-    private var db = FirebaseFirestore.getInstance()
 
     private var userDogProfile: Profile? = null
-    private var otherDogProfile: Profile? = null
-    var targetEmail: String? = null
-    var isCardFullySwiped = false
     var counter = 0
     val items = mutableListOf<Itemx>()
     var manager: CardStackLayoutManager? = null
 
     private lateinit var cardSwipeTopbar: CardSwipeTopbar;
     private val deviceTokenHandler: DeviceTokenHandler = DeviceTokenHandler();
-    private var toolbar: Toolbar? = null
     private val firebaseUtil: FirebaseUtil = FirebaseUtil();
-    private lateinit var optionsBtn: Button
     private val pushNotificationSender: PushNotificationSender = PushNotificationSender()
-
     private val statusbarColorHandler: StatusbarColorHandler = StatusbarColorHandler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         statusbarColorHandler.setStatusbarBackgroundColor(this, Color.WHITE)
-
-
-        // Configuración del diseño de la actividad
         setContentView(R.layout.activity_card_swipe)
 
-        // Inicialización de la base de datos y otras importaciones
         initDatabase()
         initImports()
 
         cardSwipeTopbar = CardSwipeTopbar(this)
         this.cardSwipeTopbar.configureTopbar()
 
-        // Obtener el perfil del usuario actual
+        // Obtains current user profile
         getCurrentProfile()
             .thenAccept { userEmail ->
                 FirebaseMessaging.getInstance()
@@ -101,25 +85,30 @@ class CardSwipeActivity : AppCompatActivity() {
                         }
 
                         firebaseUtil.getCurrentFirebaseUser();
-
                         firebaseUtil.getCurrentUser { user: User ->
                             Log.i("CardSwipeActivity", "userEmail attached to token: " + user.email)
                             deviceTokenHandler.storeDeviceToken(user.email, result);
 
                             firebaseUtil.getCountUnreadMessagesInAllChatrooms(user.email)
-                                .thenAccept{ result ->
-                                    if(result > 0){
+                                .thenAccept { result ->
+                                    if (result > 0) {
                                         this.cardSwipeTopbar.showBadge(CardSwipeTopbar.CardSwipeTobarOption.CHAT)
                                     }
-                                    Log.i("CardSwipeActivity", "finished count of messages: "+result)
+                                    Log.i(
+                                        "CardSwipeActivity",
+                                        "finished count of messages: " + result
+                                    )
                                 }
 
                             firebaseUtil.getCountUnCheckedMatches(user.email)
-                                .thenAccept{ result ->
-                                    if(result > 0){
+                                .thenAccept { result ->
+                                    if (result > 0) {
                                         this.cardSwipeTopbar.showBadge(CardSwipeTopbar.CardSwipeTobarOption.MATCHES)
                                     }
-                                    Log.i("CardSwipeActivity", "finished count of matches: "+result)
+                                    Log.i(
+                                        "CardSwipeActivity",
+                                        "finished count of matches: " + result
+                                    )
                                 }
                         }
 
@@ -135,36 +124,6 @@ class CardSwipeActivity : AppCompatActivity() {
     }
 
     // Paginate profile results
-    /*private fun paginate() {
-        val old = adapter.items
-        addList().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.i("paginación", "paginación")
-                val new = task.result
-                if (new.isEmpty()) {
-                    // Si no hay más perfiles disponibles, muestra el texto
-                    Toast.makeText(this, "No more profiles available 1", Toast.LENGTH_LONG).show()
-                } else {
-                    val callback = CardStackCallback(old, new)
-                    val res = DiffUtil.calculateDiff(callback)
-                    adapter.items = new
-                    res.dispatchUpdatesTo(adapter)
-                }
-            } else {
-                Toast.makeText(
-                    this,
-                    "No se pudo cargar la información de la base de datos",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }.addOnCompleteListener {
-            if (!it.isSuccessful || it.result.isEmpty()) {
-                // Si la tarea no tuvo éxito o la lista de perfiles es vacía,
-                // muestra el texto "no more profiles available"
-                Toast.makeText(this, "No more profiles available 2", Toast.LENGTH_LONG).show()
-            }
-        }
-    }*/
     private fun paginate() {
         addList().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -192,12 +151,9 @@ class CardSwipeActivity : AppCompatActivity() {
     private fun addList(): Task<List<Itemx>> {
         val taskSource = TaskCompletionSource<List<Itemx>>()
 
-        // Llamar a getOtherProfiles y obtener la lista de perfiles
         otherProfileActions.getOtherProfiles(userDogProfile!!) { profiles ->
-            // Limpiar la lista antes de agregar nuevos elementos
             items.clear()
 
-            // Iterar sobre cada perfil y agregar un elemento Itemx a la lista de items
             profiles.forEach { profile ->
                 items.add(
                     Itemx(
@@ -209,29 +165,13 @@ class CardSwipeActivity : AppCompatActivity() {
                     )
                 )
             }
-            // Añade una card final
-           /* items.add(
-                Itemx(
-                    getResourceUri(R.drawable.end_card),
-                    "",
-                    "",
-                    "",
-                    "",
-                )
-            )*/
 
-            // Establecer el resultado en la tarea
             if (!taskSource.task.isComplete) {
                 taskSource.setResult(items)
             }
         }
 
         return taskSource.task
-    }
-
-    // Last card path
-    private fun getResourceUri(@DrawableRes drawableId: Int): String {
-        return Uri.parse("android.resource://" + packageName + "/" + drawableId).toString()
     }
 
     // Get logged in user's dog profile
@@ -249,9 +189,7 @@ class CardSwipeActivity : AppCompatActivity() {
     fun setupCardStackView() {
         val cardStackView = findViewById<CardStackView>(R.id.card_stack_view)
 
-//        var manager = CardStackLayoutManager(this, null)
         manager = CardStackLayoutManager(this, null)
-
         manager!!.setStackFrom(StackFrom.None)
         manager!!.setVisibleCount(3)
         manager!!.setTranslationInterval(8.0f)
@@ -262,7 +200,6 @@ class CardSwipeActivity : AppCompatActivity() {
         manager!!.setCanScrollHorizontal(true)
         manager!!.setSwipeableMethod(SwipeableMethod.Manual)
         manager!!.setOverlayInterpolator(LinearInterpolator())
-
         manager = CardStackLayoutManager(this, object : CardStackListener {
 
             override fun onCardDragging(direction: Direction?, ratio: Float) {
@@ -298,7 +235,7 @@ class CardSwipeActivity : AppCompatActivity() {
                     }
                 }
 
-                // Recarga la cola de cards
+                // Reload cards
                 if (manager!!.topPosition == adapter.itemCount) {
                     Toast.makeText(
                         this@CardSwipeActivity,
@@ -309,7 +246,6 @@ class CardSwipeActivity : AppCompatActivity() {
                     val cardContainer = findViewById<View>(R.id.card_stack_view)
                     cardContainer.setVisibility(View.GONE)
                 }
-//                Log.i("man - adapt",manager.topPosition.toString() + " "+ adapter.itemCount.toString())
             }
 
             override fun onCardRewound() {
@@ -340,7 +276,6 @@ class CardSwipeActivity : AppCompatActivity() {
                 cardStackView.layoutManager = manager
                 cardStackView.adapter = adapter
                 cardStackView.itemAnimator = DefaultItemAnimator()
-//                checkNoMoreCards()
             } else {
                 Toast.makeText(this, "Could not load database information", Toast.LENGTH_SHORT)
                     .show()
@@ -357,7 +292,7 @@ class CardSwipeActivity : AppCompatActivity() {
     }
 
     private fun saveLike(profilesMatching: ProfilesMatching) {
-        // Método para guardar el perfil que ha sido gustado
+        // Saving profile that received like
         val data = hashMapOf(
             "user_original" to profilesMatching.user_original,
             "profile_original" to profilesMatching.profile_original,
@@ -412,20 +347,19 @@ class CardSwipeActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
     }
 
-
     // Initialize other class imports
     private fun initImports() {
         profileActions = ProfileActions()
         otherProfileActions = OtherProfileActions()
     }
 
-    private fun sendPushNotification(targetUserEmail: String){
+    private fun sendPushNotification(targetUserEmail: String) {
 
         firebaseUtil.currentUserDetails()
             .get()
             .addOnCompleteListener { currentUserDetailsTask ->
                 firebaseUtil.getCurrentUser { currentUser ->
-                    firebaseUtil.getOtherUser(targetUserEmail){ targetUser ->
+                    firebaseUtil.getOtherUser(targetUserEmail) { targetUser ->
                         val notificationData = PushNotificationData(
                             "Nuevo MATCH!!",
                             String.format("Tienes un match del usuario %s", currentUser.username),
@@ -436,28 +370,12 @@ class CardSwipeActivity : AppCompatActivity() {
                     }
 
                 }
-        }
+            }
 
     }
 
 }
 
-/*
-     private fun addList(): List<Itemx> {
-        items.add(Itemx("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/1AKC_Maltese_Dog_Show_2011.jpg/250px-1AKC_Maltese_Dog_Show_2011.jpg", name, age, user))
-        items.add(Itemx("https://pamipe.com/wiki/wp-content/uploads/2022/09/Bichon-Maltes-2.jpg", name, age, user))
-        items.add(Itemx("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/1AKC_Maltese_Dog_Show_2011.jpg/250px-1AKC_Maltese_Dog_Show_2011.jpg", name, age, user))
-        items.add(Itemx("https://www.kiwoko.com/blogmundoanimal/wp-content/uploads/2023/06/bichon-maltes-informacion.jpg", name, age, user))
-        items.add(Itemx("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/1AKC_Maltese_Dog_Show_2011.jpg/250px-1AKC_Maltese_Dog_Show_2011.jpg", name, age, user))
-
-        items.add(Itemx("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/1AKC_Maltese_Dog_Show_2011.jpg/250px-1AKC_Maltese_Dog_Show_2011.jpg", "Markonah", "24", "Jember"))
-        items.add(Itemx("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/1AKC_Maltese_Dog_Show_2011.jpg/250px-1AKC_Maltese_Dog_Show_2011.jpg", "Marpuah", "20", "Malang"))
-        items.add(Itemx("https://www.kiwoko.com/blogmundoanimal/wp-content/uploads/2023/06/bichon-maltes-informacion.jpg", "Sukijah", "27", "Jonggol"))
-        items.add(Itemx("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/1AKC_Maltese_Dog_Show_2011.jpg/250px-1AKC_Maltese_Dog_Show_2011.jpg", "Markobar", "19", "Bandung"))
-        items.add(Itemx("https://pamipe.com/wiki/wp-content/uploads/2022/09/Bichon-Maltes-2.jpg", "Marmut", "25", "Hutan"))
-
-        return items
-    }*/
 
 
 

@@ -50,28 +50,6 @@ class UserMethods {
         }
     }
 
-    fun getCurrentUser(callback: (User) -> Unit) {
-        var user: User
-        fUser = firebaseUtil.getCurrentFirebaseUser()!!
-        Log.i("userEmail", fUser?.email.toString())
-        db.collection("user").document(fUser?.email.toString()).get()
-            .addOnCompleteListener() { task ->
-                if (task.isSuccessful) {
-                    val document = task.result
-                    user = User(
-                        name = document.getString("name") ?: "",
-                        phone = document.getString("phone") ?: "",
-                        username = document.getString("username") ?: "",
-                        surname = document.getString("surname") ?: "",
-                        token = document.getString("token") ?: "",
-                        town = document.getString("town") ?: "",
-                    )
-                    Log.i("getCurrentUser", user.name.toString())
-                    callback(user)
-                }
-            }
-    }
-
     fun updateUserPassword(user: FirebaseUser, newPassword: String) {
         Log.i("updateUserPassword password", newPassword)
         user?.let {

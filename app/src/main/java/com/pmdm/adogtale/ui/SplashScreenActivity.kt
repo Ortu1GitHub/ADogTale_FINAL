@@ -3,7 +3,6 @@ package com.pmdm.adogtale.ui
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
 import android.widget.Button
@@ -19,15 +18,14 @@ class SplashScreenActivity : AppCompatActivity() {
     private lateinit var btnChatNow: Button
     private lateinit var btnChatLater: Button
     private lateinit var countdownTextView: TextView
-    private var countDownTimer: CountDownTimer? = null
     private lateinit var iv1: ImageView
     private lateinit var iv2: ImageView
     private lateinit var tv1: TextView
     private lateinit var tv2: TextView
     private val firebaseUtil: FirebaseUtil = FirebaseUtil()
 
-    // Duración del splash screen en milisegundos
-    private val SPLASH_DISPLAY_LENGTH: Long = 1000000 // 1000 segundos
+    // Splash screen duration
+    private val SPLASH_DISPLAY_LENGTH: Long = 1000000
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,12 +40,11 @@ class SplashScreenActivity : AppCompatActivity() {
         tv1 = findViewById(R.id.tv1)
         tv2 = findViewById(R.id.tv2)
 
-        // Cargar las imágenes en los ImageView
+        // To load images in imageview
         val im1 = intent.getStringExtra("pic_original")
         val im2 = intent.getStringExtra("pic_target")
 
-        //Original and target images are loaded
-
+        // Original and target images are loaded
         if (!im1.isNullOrEmpty()) {
             Picasso.get()
                 .load(im1)
@@ -73,10 +70,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val targetEmail = intent.getStringExtra("targetEmail") as String
         Log.i("splash", "me he ejecutado")
 
-        // Agregar listener de clic al botón ChatNow
         btnChatNow.setOnClickListener {
-            // Abrir la nueva ventana de chat
-            //TODO setear a true los likes de ambos usuarios
 
             firebaseUtil.getCurrentUser { currentUser ->
                 firebaseUtil.putAllMatchesToChecked(currentUser.email)
@@ -97,20 +91,15 @@ class SplashScreenActivity : AppCompatActivity() {
 
         }
 
-        // Agregar listener de clic al botón ChatLater
         btnChatLater.setOnClickListener {
-            // Cambia a la actividad principal y cierra esta
             val mainIntent = Intent(this@SplashScreenActivity, CardSwipeActivity::class.java)
             startActivity(mainIntent)
             finish()
         }
 
-        // Handler para pasar a la actividad principal después de SPLASH_DISPLAY_LENGTH
         Handler().postDelayed({
-            // Crea un intent para iniciar la actividad principal
             val mainIntent = Intent(this@SplashScreenActivity, CardSwipeActivity::class.java)
             startActivity(mainIntent)
-            // Cierra esta actividad
             finish()
         }, SPLASH_DISPLAY_LENGTH)
     }

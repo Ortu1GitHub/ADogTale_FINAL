@@ -20,12 +20,10 @@ class DescriptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_description)
-
         backBtn = findViewById(R.id.back_btn)
-
         val payload = intent.getStringExtra("targetEmail") as String
 
-        profileActions.getProfileFromEmail(payload){ profileToShow ->
+        profileActions.getProfileFromEmail(payload) { profileToShow ->
 
             val images =
                 Stream.of(
@@ -34,33 +32,24 @@ class DescriptionActivity : AppCompatActivity() {
                     profileToShow.pic3,
                     profileToShow.pic4
                 )
-                    .filter{ image -> !image.isBlank() }
+                    .filter { image -> !image.isBlank() }
                     .collect(Collectors.toList())
 
             setupScreen(images, profileToShow.name, profileToShow.shortDescription)
         }
-
         backBtn?.setOnClickListener { v: View? -> onBackPressed() }
-
     }
 
-    fun setupScreen(images: List<String>, buddyName: String, buddyShortDescription: String){
-
+    fun setupScreen(images: List<String>, buddyName: String, buddyShortDescription: String) {
         val carousel: ImageCarousel = findViewById(R.id.description_image_carousel)
-
         val carouselItems =
             images.stream()
-                .map{ image -> CarouselItem( imageUrl = image ) }
+                .map { image -> CarouselItem(imageUrl = image) }
                 .collect(Collectors.toList())
-
         carousel.setData(carouselItems)
-
         val title = findViewById<TextView>(R.id.description_title)
         title.setText(buddyName)
-
         val text = findViewById<TextView>(R.id.description_text)
         text.setText(buddyShortDescription)
     }
-
-
 }

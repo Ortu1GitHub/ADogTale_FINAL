@@ -59,6 +59,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     companion object {
-        const val CHANNEL_NAME = "CANAL DE NOTIFICACIONES"
+        const val CHANNEL_NAME = "NOTIFICATION CHANNEL"
     }
 }
