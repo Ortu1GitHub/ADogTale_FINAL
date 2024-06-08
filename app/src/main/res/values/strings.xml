@@ -120,10 +120,14 @@
     <string name="chatlater">Chat later</string>
     <string name="next">Next</string>
     <string name="done">Done</string>
+    <string name="age">Age</string>
     <string name="match">IT IS A MATCH!!</string>
     <string name="signup">Sign Up</string>
     <string name="choose_gender">Choose gender</string>
     <string name="choose_breed">Choose breed</string>
+    <string name="pref_breed">Prefered breed</string>
+    <string name="looking_for">Looking for</string>
+    <string name="short_description">Describe yourself</string>
     <string name="prefDistance">Prefered distance</string>
     <string name="prefAge">Prefered age range</string>
     <string name="choosePics">Choose your best pictures</string>

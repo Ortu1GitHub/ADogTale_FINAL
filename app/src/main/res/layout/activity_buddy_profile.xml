@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:elevation="4dp"
             android:fontFamily="@font/londrina_shadow"
-            android:text="ADT"
+            android:text="@string/adt"
             android:textSize="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:fontFamily="@font/londrina_solid"
-                android:text="SIGN UP"
+                android:text="@string/sing_up"
                 android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:hint="Name"/>
+                android:hint="@string/name"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:layout_marginVertical="10dp"
-                android:hint="Age"/>
+                android:hint="@string/age"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -163,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginVertical="10dp"
-                android:hint="Describe yourself"/>
+                android:hint="@string/short_description"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/backgroundGreen"
-            android:text="Next"
+            android:text="@string/next"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

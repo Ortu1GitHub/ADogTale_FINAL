@@ -24,6 +24,7 @@
             android:fontFamily="@font/londrina_shadow"
             android:text="@string/adt"
             android:textSize="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -78,7 +79,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:inputType="none"
-            android:text="Looking for" />
+            android:text="@string/looking_for" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -99,7 +100,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:inputType="none"
-            android:text="Prefered breed" />
+            android:text="@string/pref_breed" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
