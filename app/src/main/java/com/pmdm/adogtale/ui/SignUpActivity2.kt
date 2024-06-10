@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.pmdm.adogtale.R
 import com.pmdm.adogtale.model.User
@@ -26,17 +27,23 @@ class SignUpActivity2 : AppCompatActivity() {
         backBtn?.setOnClickListener { v: View? -> onBackPressed() }
 
         btnNext.setOnClickListener() {
-            val nameStr = name.text.toString()
-            val surnameStr = surname.text.toString()
-            val townStr = town.text.toString()
-            val phoneStr = phone.text.toString()
-            user.name = nameStr
-            user.surname = surnameStr
-            user.town = townStr
-            user.phone = phoneStr
-            val intent = Intent(this, BuddyProfileActivity::class.java)
-            intent.putExtra("user", user)
-            startActivity(intent)
+            val nameStr = name.text.toString().trim()
+            val surnameStr = surname.text.toString().trim()
+            val townStr = town.text.toString().trim()
+            val phoneStr = phone.text.toString().trim()
+
+            if (nameStr.isNotEmpty() && surnameStr.isNotEmpty() && townStr.isNotEmpty() && phoneStr.isNotEmpty()) {
+                user.name = nameStr
+                user.surname = surnameStr
+                user.town = townStr
+                user.phone = phoneStr
+                val intent = Intent(this, BuddyProfileActivity::class.java)
+                intent.putExtra("user", user)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Please, fill the fields", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 }

@@ -8,6 +8,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.pmdm.adogtale.R
 import com.pmdm.adogtale.model.Profile
@@ -43,27 +44,32 @@ class BuddyProfileActivity : AppCompatActivity() {
         backBtn?.setOnClickListener { v: View? -> onBackPressed() }
 
         btnNext.setOnClickListener() {
-            val nameStr = name.text.toString()
-            val ageStr = age.text.toString()
-            val selectedGenderStr = acGender.text.toString()
-            val selectedBreedStr = acBreed.text.toString()
-            val somethingStr = something.text.toString()
-            val shortDescriptionStr = shortDescription.text.toString()
+
+            val nameStr = name.text.toString().trim()
+            val ageStr = age.text.toString().trim()
+            val selectedGenderStr = acGender.text.toString().trim()
+            val selectedBreedStr = acBreed.text.toString().trim()
+            val somethingStr = something.text.toString().trim()
+            val shortDescriptionStr = shortDescription.text.toString().trim()
             val userEmail = user.email
-            val profile =
-                Profile(
-                    name = nameStr,
-                    age = ageStr,
-                    gender = selectedGenderStr,
-                    breed = selectedBreedStr,
-                    something = somethingStr,
-                    shortDescription = shortDescriptionStr,
-                    userEmail = userEmail
-                )
-            val intent = Intent(this, BuddyProfileActivity2::class.java)
-            intent.putExtra("profile", profile)
-            intent.putExtra("user", user)
-            startActivity(intent)
+            if (nameStr.isNotEmpty() && ageStr.isNotEmpty() && selectedBreedStr.isNotEmpty() && selectedBreedStr.isNotEmpty() && somethingStr.isNotEmpty() && shortDescriptionStr.isNotEmpty()) {
+                val profile =
+                    Profile(
+                        name = nameStr,
+                        age = ageStr,
+                        gender = selectedGenderStr,
+                        breed = selectedBreedStr,
+                        something = somethingStr,
+                        shortDescription = shortDescriptionStr,
+                        userEmail = userEmail
+                    )
+                val intent = Intent(this, BuddyProfileActivity2::class.java)
+                intent.putExtra("profile", profile)
+                intent.putExtra("user", user)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this,"Please fill the fields",Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

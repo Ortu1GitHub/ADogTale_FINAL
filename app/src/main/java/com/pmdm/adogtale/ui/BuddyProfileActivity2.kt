@@ -148,33 +148,39 @@ class BuddyProfileActivity2 : AppCompatActivity() {
         profile.pic2 = profilePics[btnPic2.id.toString()] ?: ""
         profile.pic3 = profilePics[btnPic3.id.toString()] ?: ""
         profile.pic4 = profilePics[btnPic4.id.toString()] ?: ""
-        db.collection("profile").document(user.email).set(
-            hashMapOf(
-                "userEmail" to profile.userEmail,
-                "name" to profile.name,
-                "age" to profile.age,
-                "gender" to profile.gender,
-                "breed" to profile.breed,
-                "something" to profile.something,
-                "shortDescription" to profile.shortDescription,
-                "lookingFor" to profile.lookingFor,
-                "prefBreed" to profile.prefBreed,
-                "prefDistance" to profile.prefDistance,
-                "pic1" to profile.pic1,
-                "pic2" to profile.pic2,
-                "pic3" to profile.pic3,
-                "pic4" to profile.pic4,
-                "prefLowestAge" to profile.preferedLowAge,
-                "prefHighestAge" to profile.preferedHighAge,
-                "town" to profile.town
-            )
-        ).addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                Toast.makeText(this, "Profile created", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, CardSwipeActivity::class.java)
-                startActivity(intent)
+        if (profile.lookingFor.isNotEmpty() && profile.prefBreed.isNotEmpty() && profile.prefBreed.isNotEmpty() &&
+            profile.prefDistance.isNotEmpty()) {
+            db.collection("profile").document(user.email).set(
+                hashMapOf(
+                    "userEmail" to profile.userEmail,
+                    "name" to profile.name,
+                    "age" to profile.age,
+                    "gender" to profile.gender,
+                    "breed" to profile.breed,
+                    "something" to profile.something,
+                    "shortDescription" to profile.shortDescription,
+                    "lookingFor" to profile.lookingFor,
+                    "prefBreed" to profile.prefBreed,
+                    "prefDistance" to profile.prefDistance,
+                    "pic1" to profile.pic1,
+                    "pic2" to profile.pic2,
+                    "pic3" to profile.pic3,
+                    "pic4" to profile.pic4,
+                    "prefLowestAge" to profile.preferedLowAge,
+                    "prefHighestAge" to profile.preferedHighAge,
+                    "town" to profile.town
+                )
+            ).addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Profile created", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, CardSwipeActivity::class.java)
+                    startActivity(intent)
+                }
             }
+        } else {
+            Toast.makeText(this, "Please, fill the fields", Toast.LENGTH_SHORT).show()
         }
+
     }
 
     // Create user account in Firebase

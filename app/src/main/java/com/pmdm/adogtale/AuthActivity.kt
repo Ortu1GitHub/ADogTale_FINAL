@@ -39,11 +39,18 @@ class AuthActivity : AppCompatActivity() {
 
 
         btnLogin.setOnClickListener() {
-            signIn(
-                txtEmail.text.toString().trim().lowercase(),
-                txtPassword.text.toString().trim(),
-                cbRemember.isChecked
-            )
+            var email = txtEmail.text.toString().trim().lowercase()
+            var password = txtPassword.text.toString().trim()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                signIn(
+                    email,
+                    password,
+                    cbRemember.isChecked
+                )
+            } else {
+                Toast.makeText(this, "Please, fill the fields email and password", Toast.LENGTH_SHORT).show()
+            }
+
         }
         btnSingup.setOnClickListener() {
             val intent = Intent(this, SignUpActivity::class.java)

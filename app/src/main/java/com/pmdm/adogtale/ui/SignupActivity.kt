@@ -26,18 +26,22 @@ class SignUpActivity : AppCompatActivity() {
         backBtn?.setOnClickListener { v: View? -> onBackPressed() }
 
         btnNext.setOnClickListener() {
-            var pass1 = txtPassword1.text.toString()
-            var pass2 = txtPassword2.text.toString()
-            var email = txtEmail.text.toString().lowercase()
-            var username = username.text.toString()
+            var pass1 = txtPassword1.text.toString().trim()
+            var pass2 = txtPassword2.text.toString().trim()
+            var email = txtEmail.text.toString().lowercase().trim()
+            var username = username.text.toString().trim()
 
-            if (pass1 == pass2) {
-                val user = User(username = username, email = email, password = pass1)
-                val intent = Intent(this, SignUpActivity2::class.java)
-                intent.putExtra("user", user)
-                startActivity(intent)
+            if (pass1 == pass2 ) {
+                if (email.isNotEmpty() && username.isNotEmpty() && pass1.isNotEmpty()) {
+                    val user = User(username = username, email = email, password = pass1)
+                    val intent = Intent(this, SignUpActivity2::class.java)
+                    intent.putExtra("user", user)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this, "Please, fill the fields", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(this, "Password invalid", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 txtPassword2.requestFocus()
             }
         }
